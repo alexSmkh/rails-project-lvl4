@@ -1,0 +1,28 @@
+name: build
+
+on:
+  push:
+    branches:
+      - '**'
+    tags:
+      - '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0.2'
+      - name: Install bundler
+        run: gem install bundler
+
+      - name: Install dependencies
+        run: make install
+
+      - name: Linter
+        run: make lint
+
+      - name: Tests
+        run: make test
