@@ -7,9 +7,11 @@ ruby '3.0.2'
 
 gem 'aasm', '~> 5.2'
 gem 'bootsnap', '>= 1.4.4', require: false
-gem 'bootstrap', '~> 5.1.3'
 gem 'faker'
 gem 'jbuilder', '~> 2.7'
+gem 'omniauth'
+gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
+gem 'omniauth-rails_csrf_protection'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.4'
 gem 'rollbar', '~> 3.3'
@@ -22,6 +24,7 @@ gem 'webpacker', '~> 5.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'dotenv-rails'
   gem 'prettier', '~> 2.0'
   gem 'rubocop', '~> 1.26'
   gem 'rubocop-performance', '~> 1.13'
