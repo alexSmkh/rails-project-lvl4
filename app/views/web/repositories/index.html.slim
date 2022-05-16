@@ -1,0 +1,27 @@
+.shadow-lg.rounded.p-4.h-100
+  - if @repositories.empty?
+    .d-flex.flex-column.justify-content-center.h-100.text-center.align-middle
+      div
+        p.fs-3.fw-bolder.text-center = i18n('.no_repositories_yet')
+        = link_to new_repository_path, class: 'btn btn-primary text-center' do
+          i.fa-solid.fa-plus.me-2
+          span = t('.add_repository')
+  - else
+    = link_to new_repository_path, class: 'btn btn-primary' do
+      i.fa-solid.fa-plus.me-1
+      = t('.add_repository')
+
+    .shadow.rounded.table-responsive.mb-4
+      table.table.align-middle
+        thead
+          tr
+            th.fw-bold = t('.name')
+            th.fw-bold.text-center = t('.language')
+            th.fw-bold.text-center = t('.last_check_passed')
+        tbody
+          - @repositories.each do |repo|
+            tr
+              td
+                = link_to repo.repo_name, '#', class: 'text-decoration-none'
+              td.text-center
+                = repo.language

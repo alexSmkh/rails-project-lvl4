@@ -7,8 +7,10 @@ ruby '3.0.2'
 
 gem 'aasm', '~> 5.2'
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'enumerize'
 gem 'faker'
 gem 'jbuilder', '~> 2.7'
+gem 'octokit', '~> 4.0'
 gem 'omniauth'
 gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
 gem 'omniauth-rails_csrf_protection'
@@ -36,6 +38,7 @@ end
 group :development do
   gem 'bullet'
   gem 'html2slim'
+  gem 'i18n-debug'
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'spring'

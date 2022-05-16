@@ -22,20 +22,24 @@ html
           button.btn-close type='button' data-bs-dismiss='alert' area-label='Close'
 
     header.container
-      nav.row.py-2.px-4.align-items-center
-        .col-1.me-2
-          = link_to root_path, class: 'fs-3' do
+      nav.d-flex.justify-content-between.align-items-center.p-3
+        div
+          = link_to root_path, class: 'fs-3 navbar-brand me-4' do
             i.fa-solid.fa-house
 
-        - if signed_in?
-          .col.text-end
+          - if signed_in?
+            = link_to I18n.t('repositories'),
+                      repositories_path,
+                      class: 'font-weight-bolder text-decoration-none fs-4'
+        div
+          - if signed_in?
+            span.text-secondary.me-3.fs-5.align-middle = current_user.email
             = link_to session_path, method: :delete,
                                     data: { confirm: t('messages.are_you_sure') },
                                     class: 'btn btn-outline-secondary' do
               i.fa-solid.fa-arrow-right-from-bracket.me-2
               span = t('sign_out')
-        - else
-          .col.text-end
+          - else
             = link_to new_session_path, class: 'btn btn-outline-primary' do
               i.fa-solid.fa-arrow-right-to-bracket.me-2
               span = t('sign_in')

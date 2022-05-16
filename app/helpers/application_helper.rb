@@ -10,4 +10,8 @@ module ApplicationHelper
 
     tag.p(class: 'mb-0') { content }
   end
+
+  def i18n(path)
+    t(path)
+  end
 end

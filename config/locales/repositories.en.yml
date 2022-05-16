@@ -1,0 +1,12 @@
+en:
+  web:
+    repositories:
+      index:
+        add_repository: Add repository
+        no_repositories_yet: No repositories yet
+        name: Name
+        language: Language
+        last_check_passed: Last check passed
+      create:
+        success: 'The repository was successfully added'
+        failed: 'The repository has not been added'
