@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     get 'sessions/new', as: 'new_session'
     delete 'sessions', to: 'sessions#destroy', as: 'session'
 
-    resources :repositories, only: %i[index new create]
+    resources :repositories, only: %i[index new create show]
 
     root 'welcome#index'
   end

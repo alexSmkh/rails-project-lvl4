@@ -8,5 +8,6 @@ en:
     are_you_sure: Are you sure?
     successfully_logged_in: You are successfully logged in
     successfully_logged_out: You are successfully logged out
+    need_sign_in: You need to sign in
     unccessfully_logged_in: Uh oh, something went wrong. Please try to sign in again
     user_not_authorized: You are not authorized to perform this action

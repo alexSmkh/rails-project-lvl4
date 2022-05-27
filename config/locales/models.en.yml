@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    attributes:
+      repository:
+        name: Name
+        language: Language
+        repo_created_at: Created at
+        repo_updated_at: Updated at
+
