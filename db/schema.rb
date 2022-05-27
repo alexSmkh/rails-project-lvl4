@@ -10,22 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_17_143811) do
+ActiveRecord::Schema.define(version: 2022_05_27_123009) do
 
   create_table "repositories", force: :cascade do |t|
-    t.string "link"
-    t.string "owner_name"
-    t.string "repo_name"
-    t.text "description"
-    t.string "default_branch"
-    t.integer "watchers_count"
+    t.string "name"
+    t.string "full_name"
+    t.string "html_url"
     t.string "language"
+    t.integer "user_id", null: false
     t.datetime "repo_created_at"
     t.datetime "repo_updated_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id", null: false
-    t.string "full_name"
     t.index ["user_id"], name: "index_repositories_on_user_id"
   end
 

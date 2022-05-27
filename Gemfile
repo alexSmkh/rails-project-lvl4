@@ -7,6 +7,7 @@ ruby '3.0.2'
 
 gem 'aasm', '~> 5.2'
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'dry-container'
 gem 'enumerize'
 gem 'faker'
 gem 'jbuilder', '~> 2.7'
@@ -51,6 +52,7 @@ group :test do
   gem 'minitest-power_assert', '~> 0.3.1'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+  gem 'webmock'
 end
 
 group :production do

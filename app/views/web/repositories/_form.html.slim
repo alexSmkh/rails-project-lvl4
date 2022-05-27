@@ -1,7 +1,8 @@
-= simple_form_for :repository, url: repositories_url, method: :post do |f|
+= simple_form_for repository do |f|
   .mb-2
     = f.input :full_name,
                label: 'Github',
-               collection: @repositories,
-               required: true
+               collection: repositories,
+               label_method: :full_name,
+               value_method: :full_name
   = f.submit class: 'btn btn-primary'

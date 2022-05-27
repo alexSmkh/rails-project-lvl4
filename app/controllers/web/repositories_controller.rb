@@ -9,29 +9,29 @@ class Web::RepositoriesController < Web::ApplicationController
   end
 
   def new
-    already_added_repos = current_user.repositories.map(&:full_name)
-    # rubocop:disable Performance/InefficientHashSearch
-    @repositories = @github_client.repos
-                                  .filter { |repo| Repository.language.values.include? repo.language&.downcase }
-                                  .map(&:full_name)
-                                  .difference(already_added_repos)
-    # rubocop:enable Performance/InefficientHashSearch
+    authorize Repository
+    already_added_repos = current_user.repositories.map(&:name)
+    @repository = current_user.repositories.build
+    @repositories =
+      @github_client.repos.filter do |repo|
+        Repository.language.values.include?(repo[:language]&.downcase) &&
+          already_added_repos.exclude?(repo[:name])
+      end
   end
 
   def create
+    authorize Repository
+
     repo = @github_client.repo(params[:repository][:full_name])
-    repository = current_user.repositories.build(
-      link: repo.html_url,
-      owner_name: repo.owner.login,
-      full_name: repo.full_name,
-      repo_name: repo.name,
-      language: repo.language.downcase,
-      description: repo.description,
-      default_branch: repo.default_branch,
-      watchers_count: repo.watchers_count,
-      repo_created_at: repo.created_at,
-      repo_updated_at: repo.updated_at
-    )
+    repository =
+      current_user.repositories.build(
+        html_url: repo[:html_url],
+        full_name: repo[:full_name],
+        name: repo[:name],
+        language: repo[:language].downcase,
+        repo_created_at: repo[:created_at],
+        repo_updated_at: repo[:updated_at]
+      )
 
     if repository.save
       redirect_to repositories_path, notice: t('.success')
@@ -43,6 +43,7 @@ class Web::RepositoriesController < Web::ApplicationController
   private
 
   def github_client
-    @github_client ||= Octokit::Client.new(access_token: current_user.token, per_page: 100)
+    @github_client ||=
+      ApplicationContainer[:github_client].new(current_user.token)
   end
 end

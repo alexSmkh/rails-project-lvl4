@@ -1,5 +1,4 @@
 ---
-
 require:
   - rubocop-performance
   - rubocop-rails
@@ -43,4 +42,7 @@ Style/AsciiComments:
   Enabled: false
 
 Rails/FilePath:
+  Enabled: false
+
+Lint/RedundantCopDisableDirective:
   Enabled: false

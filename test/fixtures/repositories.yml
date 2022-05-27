@@ -1,23 +1,8 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  link: MyString
-  owner_name: MyString
-  repo_name: MyString
-  description: MyText
-  default_branch: MyString
-  watchers_count: 1
-  language: MyString
-  repo_created_at: 2022-05-13 13:47:03
-  repo_updated_at: 2022-05-13 13:47:03
-
-two:
-  link: MyString
-  owner_name: MyString
-  repo_name: MyString
-  description: MyText
-  default_branch: MyString
-  watchers_count: 1
-  language: MyString
-  repo_created_at: 2022-05-13 13:47:03
-  repo_updated_at: 2022-05-13 13:47:03
+  html_url: https://github.com/alexSmkh/rss-reader
+  name: rss-reader
+  full_name: alex/Smkh
+  language: javascript
+  user: one
+  repo_created_at: Wed, 03 Jun 2020 16:34:18.000000000 UTC +00:00
+  repo_updated_at: Fri, 21 Aug 2020 17:55:56.000000000 UTC +00:00
