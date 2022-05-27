@@ -2,7 +2,6 @@
 
 class Web::AuthController < Web::ApplicationController
   def callback
-    # debugger
     user = User.find_by(email: auth.info.email)
     user ||= User.new(
       nickname: auth.info.nickname,

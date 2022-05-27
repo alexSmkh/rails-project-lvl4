@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Web::RepositoriesController < Web::ApplicationController
+  before_action :auth_user!
   before_action :github_client, only: %i[new create]
 
   def index
@@ -38,6 +39,11 @@ class Web::RepositoriesController < Web::ApplicationController
     else
       redirect_to new_repository_path, alert: t('.failed')
     end
+  end
+
+  def show
+    @repository = Repository.find(params[:id])
+    authorize @repository
   end
 
   private

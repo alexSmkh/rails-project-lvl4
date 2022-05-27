@@ -18,4 +18,8 @@ module AuthConcern
   def signed_in?
     !!current_user
   end
+
+  def auth_user!
+    redirect_to root_path, alert: t('messages.need_sign_in') unless signed_in?
+  end
 end
