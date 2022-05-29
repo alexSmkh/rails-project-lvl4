@@ -27,6 +27,7 @@ class Web::RepositoriesController < Web::ApplicationController
     repository =
       current_user.repositories.build(
         html_url: repo[:html_url],
+        clone_url: repo[:clone_url],
         full_name: repo[:full_name],
         name: repo[:name],
         language: repo[:language].downcase,
