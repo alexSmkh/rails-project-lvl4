@@ -1,0 +1,7 @@
+en:
+  web:
+    repositories:
+      checks:
+        create:
+          success: 'The check was successfully created'
+          fail: 'The check was not created'
