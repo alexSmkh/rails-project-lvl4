@@ -1,3 +1,7 @@
 .d-flex.d-flex.justify-content-center.align-items-center.h-100
   .d-flex.d-flex.justify-content-center.align-items-center.shadow-lg.w-50.h-50.rounded.p-4
-    = render 'form', repository: @repository, repositories: @repositories
+    = render 'form',
+             model: @repository,
+             model_field: :full_name,
+             collection: @repository_full_names,
+             label: 'Github'
