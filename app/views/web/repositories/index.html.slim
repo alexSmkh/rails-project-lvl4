@@ -26,4 +26,4 @@
               td
                 = repo.language
               td
-                = repo.checks.last.result
+                = repo.checks.empty? ? t('.no_checks_yet') : repo.checks.last&.result
