@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class GithubClientStub
+  # rubocop:disable Style/RedundantInitialize
   def initialize(_user_token); end
+  # rubocop:enable Style/RedundantInitialize
 
   def repo(_full_name)
     fixture_to_hash('repository.json')
@@ -9,6 +11,10 @@ class GithubClientStub
 
   def repos
     fixture_to_hash('repositories.json')
+  end
+
+  def commits(_repo_full_name)
+    fixture_to_hash('commits.json')
   end
 
   private

@@ -13,7 +13,7 @@ class GithubClient
     @client.repos
   end
 
-  def commits(repo)
-    @client.commits(repo)
+  def commits(repo_full_name)
+    @client.commits(repo_full_name)
   end
 end

@@ -25,7 +25,7 @@ class RepositoryCheckJob < ApplicationJob
     else
       check.fail!
     end
-  rescue StandartError
+  rescue StandardError
     check.fail!
   end
 end

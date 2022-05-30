@@ -1,13 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  state: MyString
-  reference: MyString
-  result: false
-  issues_count: 1
-
-two:
-  state: MyString
-  reference: MyString
-  result: false
-  issues_count: 1
+  aasm_state: checked
+  result: true
+  issue_count: 0
+  repository: one

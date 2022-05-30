@@ -11,13 +11,13 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def new
     authorize Repository
-
     already_added_repos = current_user.repositories.map(&:name)
     @repository = current_user.repositories.build
     repositories =
       @github_client.repos.filter do |repo|
-        Repository.language.values.include?(repo[:language]&.downcase) &&
-          already_added_repos.exclude?(repo[:name])
+        # rubocop:disable Performance/InefficientHashSearch
+        Repository.language.values.include?(repo[:language]&.downcase) && already_added_repos.exclude?(repo[:name])
+        # rubocop:enable Performance/InefficientHashSearch
       end
     @repository_full_names = repositories.map { |repo| [repo[:full_name], repo[:full_name]] }
   end
