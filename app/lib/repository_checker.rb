@@ -52,7 +52,7 @@ class RepositoryChecker
         acc << {
           file_path: file_check_result['filePath'],
           messages:
-            file_check_result['messages'] do |message|
+            file_check_result['messages'].map do |message|
               {
                 rule: message['ruleId'],
                 message: message['message'],
