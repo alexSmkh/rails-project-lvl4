@@ -6,17 +6,17 @@ class Repository::Check < ApplicationRecord
   aasm do
     state :created, initial: true
     state :checking, :checked, :failed
-  end
 
-  event :check do
-    transitions from: :created, to: :checking
-  end
+    event :check do
+      transitions from: :created, to: :checking
+    end
 
-  event :complete do
-    transitions from: :checking, to: :checked
-  end
+    event :complete do
+      transitions from: :checking, to: :checked
+    end
 
-  event :failed do
-    transitions from: :checking, to: :failed
+    event :fail do
+      transitions from: :checking, to: :failed
+    end
   end
 end

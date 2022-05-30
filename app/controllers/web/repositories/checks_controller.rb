@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Web::Repositories::Checks < Web::Repositories::ApplicationController
+class Web::Repositories::ChecksController < Web::Repositories::ApplicationController
   def create
     check = Repository::Check.new(repository_id: params[:repository_id])
 

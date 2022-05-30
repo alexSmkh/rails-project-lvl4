@@ -12,4 +12,8 @@ class GithubClient
   def repos
     @client.repos
   end
+
+  def commits(repo)
+    @client.commits(repo)
+  end
 end

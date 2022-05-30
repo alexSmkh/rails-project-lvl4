@@ -2,6 +2,11 @@ en:
   web:
     repositories:
       checks:
+        states:
+          created: Created
+          checking: Checking
+          checked: Checkedddddd
+          failed: Failed
         create:
           success: 'The check was successfully created'
           fail: 'The check was not created'

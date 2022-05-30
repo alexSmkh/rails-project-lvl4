@@ -8,6 +8,7 @@ import '@fortawesome/fontawesome-free/css/all'
 import 'bootstrap'
 import 'stylesheets/application'
 
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

@@ -6,4 +6,16 @@ en:
         language: Language
         repo_created_at: Created at
         repo_updated_at: Updated at
+      repository/check:
+        id: ID
+        state: State
+        result: Check passed
+        created_at: Created at
+        updated_at: Updated at
+        issue_count: Issue count
+        aasm_state:
+          created: Created
+          checking: Checking
+          checked: Checked
+          failed: Failed
 

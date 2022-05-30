@@ -16,12 +16,14 @@
         thead
           tr
             th.fw-bold = t('.name')
-            th.fw-bold.text-center = t('.language')
-            th.fw-bold.text-center = t('.last_check_passed')
+            th.fw-bold = t('.language')
+            th.fw-bold = t('.last_check_passed')
         tbody
           - @repositories.each do |repo|
             tr
               td
-                = link_to repo.name, '#', class: 'text-decoration-none'
-              td.text-center
+                = link_to repo.name, repository_path(repo), class: 'text-decoration-none'
+              td
                 = repo.language
+              td
+                = repo.checks.last.result

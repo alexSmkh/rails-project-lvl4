@@ -6,11 +6,12 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def index
     authorize Repository
-    @repositories = current_user.repositories
+    @repositories = current_user.repositories.includes(:checks)
   end
 
   def new
     authorize Repository
+
     already_added_repos = current_user.repositories.map(&:name)
     @repository = current_user.repositories.build
     @repositories =
@@ -43,7 +44,8 @@ class Web::RepositoriesController < Web::ApplicationController
   end
 
   def show
-    @repository = Repository.find(params[:id])
+    @repository = Repository.includes(:checks).find(params[:id])
+    @checks = @repository.checks.reverse
     authorize @repository
   end
 

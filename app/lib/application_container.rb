@@ -5,7 +5,9 @@ class ApplicationContainer
 
   if Rails.env.test?
     register :github_client, -> { GithubClientStub }
+    register :repository_checker_stub, -> { RepositoryCheckerStub }
   else
     register :github_client, -> { GithubClient }
+    register :repository_checker, -> { RepositoryChecker }
   end
 end

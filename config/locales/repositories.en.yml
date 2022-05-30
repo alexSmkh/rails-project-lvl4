@@ -8,5 +8,7 @@ en:
         language: Language
         last_check_passed: Last check passed
       create:
-        success: 'The repository was successfully added'
-        failed: 'The repository has not been added'
+        success: The repository was successfully added
+        failed: The repository has not been added
+      show:
+        reference: Reference

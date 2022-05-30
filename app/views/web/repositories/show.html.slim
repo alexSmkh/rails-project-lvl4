@@ -1,4 +1,53 @@
-h1
-  | Web::Repositories#show
-p
-  | Find me in app/views/web/repositories/show.html.erb
+.container.p-4.rounded.shadow-lg
+  h1.mb-3 = @repository.full_name
+
+  = link_to t('.check'),
+            repository_checks_path(@repository.id),
+            method: :post,
+            class: 'btn btn-primary mb-3'
+
+  p
+    span.fw-bolder.me-3 = Repository.human_attribute_name(:name)
+    = link_to @repository.name, @repository.html_url
+  p
+    span.fw-bolder.me-3 = Repository.human_attribute_name(:language)
+    = @repository.language
+  p
+    span.fw-bolder.me-3 = Repository.human_attribute_name(:repo_created_at)
+    = @repository.repo_created_at.strftime('%Y-%m-%d %H:%M')
+  p
+    span.fw-bolder.me-3 = Repository.human_attribute_name(:repo_updated_at)
+    = @repository.repo_updated_at.strftime('%Y-%m-%d %H:%M')
+
+  hr
+
+  - if @repository.checks.empty?
+    .d-flex.flex-column.justify-content-center.h-100.text-center.align-middle
+      div
+        p.fs-4.fw-bolder.text-center = i18n('.no_checks_yet')
+
+  - else
+
+    table.table.align-middle
+      thead
+        tr
+          th.fw-bold = Repository::Check.human_attribute_name(:id)
+          th.fw-bold = Repository::Check.human_attribute_name(:state)
+          th.fw-bold = t('.reference')
+          th.fw-bold = Repository::Check.human_attribute_name(:result)
+          th.fw-bold = Repository::Check.human_attribute_name(:created_at)
+      tbody
+        - @checks.each do |check|
+          tr
+            td
+              = link_to check.id, '#'
+            td
+              = check.aasm.human_state
+            td
+              - reference_sha = link_to check.reference_sha, check.reference_url
+              = check.created? || check.checking? ? render('shared/spinner') : reference_sha
+            td
+              = check.created? || check.checking? ? render('shared/spinner') : check.result
+            td
+              = check.created_at.strftime('%Y-%m-%d %H:%M')
+  end

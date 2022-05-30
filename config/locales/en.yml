@@ -2,6 +2,7 @@ en:
   sign_in: Sign in
   sign_out: Sign out
   repositories: Repositories
+  loading: Loading...
 
   messages:
     already_signed_in: You are already signed in

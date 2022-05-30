@@ -5,6 +5,10 @@ class RepositoryPolicy < ApplicationPolicy
     user
   end
 
+  def show?
+    record.user_id == user.id
+  end
+
   def new?
     user
   end
