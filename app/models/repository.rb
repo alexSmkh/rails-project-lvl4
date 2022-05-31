@@ -6,5 +6,5 @@ class Repository < ApplicationRecord
   belongs_to :user
   has_many :checks, class_name: 'Repository::Check', dependent: :destroy
 
-  enumerize :language, in: [:javascript]
+  enumerize :language, in: %i[javascript ruby]
 end
