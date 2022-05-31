@@ -40,7 +40,7 @@
         - @checks.each do |check|
           tr
             td
-              = link_to check.id, '#'
+              = link_to check.id, repository_check_path(check.repository_id, check.id)
             td
               = check.aasm.human_state
             td

@@ -5,3 +5,5 @@ one:
   result: true
   issue_count: 0
   repository: one
+  issue_messages: '[]'
+

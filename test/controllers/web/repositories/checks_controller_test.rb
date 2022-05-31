@@ -22,4 +22,12 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
     assert { !check.result }
     assert { check.issue_count == 1 }
   end
+
+  test 'should get show' do
+    check = repository_checks(:one)
+
+    get repository_check_path(check.repository_id, ].id)
+
+    assert_response :success
+  end
 end

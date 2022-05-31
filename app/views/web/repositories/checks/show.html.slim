@@ -1,0 +1,39 @@
+.container.p-4.rounded.shadow-lg
+
+  = link_to t('.go_to_repository'),
+            repository_path(@check.repository_id),
+            class: 'btn btn-primary my-2'
+
+  h1 = "Check ##{@check.id}"
+
+  table.table.mb-3
+    tbody
+      tr
+        td = Repository::Check.human_attribute_name(:created_at)
+        td = @check.created_at.strftime('%Y-%m-%d %H:%M')
+      tr
+        td = Repository::Check.human_attribute_name(:status)
+        td = @check.aasm.human_state
+      tr
+        td = Repository::Check.human_attribute_name(:result)
+        td = @check.created? || @check.checking? ? render('shared/spinner') : @check.result
+      tr
+        td = Repository::Check.human_attribute_name(:issue_count)
+        td = @check.created? || @check.checking? ? render('shared/spinner') : @check.issue_count
+
+  - if @check.checked? & @check.issue_count.positive?
+    table.table.mb-3
+      thead
+        tr
+          th.fw-bold = t('.line_column')
+          th.fw-bold = t('.rule')
+          th.fw-bold = t('.message')
+      tbody
+        - @issue_messages.each do |issue|
+          tr
+            td.table-danger colspan='3' = issue[:file_path]
+          - issue[:messages].each do |message|
+            tr
+              td = message[:message]
+              td = message[:rule]
+              td = message[:line_column]

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     delete 'sessions', to: 'sessions#destroy', as: 'session'
 
     resources :repositories, only: %i[index new create show] do
-      resources :checks, only: %i[create], module: 'repositories'
+      resources :checks, only: %i[create show], module: 'repositories'
     end
 
     root 'welcome#index'
