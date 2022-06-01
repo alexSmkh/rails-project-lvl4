@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  namespace :api do
+    post 'checks', to: 'checks#checks'
+  end
+
   namespace :web do
     get 'repositories/index'
     get 'repositories/create'
