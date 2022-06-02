@@ -17,6 +17,8 @@ class GithubClientStub
     fixture_to_hash('commits.json')
   end
 
+  def create_hook(_repo_full_name, _api_url); end
+
   private
 
   def fixture_to_hash(filename)
