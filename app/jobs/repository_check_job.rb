@@ -22,8 +22,10 @@ class RepositoryCheckJob < ApplicationJob
       reference_url: commit_reference[:html_url]
     )
       check.complete!
+      CheckMailer.with(check: check).check_passed.deliver_later
     else
       check.fail!
+      CheckMailer.with(check: check).check_failed.deliver_later
     end
   rescue StandardError
     check.fail!

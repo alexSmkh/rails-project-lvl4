@@ -1,0 +1,7 @@
+en:
+  check_mailer:
+    check_failed:
+      subject: '%{repository_name} did not pass checking'
+
+    check_passed:
+      subject: '%{repository_name} has been successfully check passed'

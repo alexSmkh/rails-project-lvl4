@@ -1,0 +1,5 @@
+p
+  = "#{link_to @repository.name.capitalize, repository_url(@repository)} has been successfully check passed!"
+
+p
+  = "Details can be found #{link_to 'here', repository_check_url(@repository, @check)}."
