@@ -23,21 +23,12 @@ class Web::RepositoriesController < Web::ApplicationController
   end
 
   def create
-    authorize Repository
+    authorize :repository
 
-    repo = @github_client.repo(params[:repository][:full_name])
-    repository =
-      current_user.repositories.build(
-        html_url: repo[:html_url],
-        clone_url: repo[:clone_url],
-        full_name: repo[:full_name],
-        name: repo[:name],
-        language: repo[:language].downcase,
-        repo_created_at: repo[:created_at],
-        repo_updated_at: repo[:updated_at]
-      )
+    repository = current_user.repositories.build(full_name: params[:repository][:full_name])
 
     if repository.save
+      RepositoryLoaderJob.perform_later(repository)
       redirect_to repositories_path, notice: t('.success')
     else
       redirect_to new_repository_path, alert: t('.failed')
