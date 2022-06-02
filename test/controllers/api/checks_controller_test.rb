@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
+class Api::ChecksControllerTest < ActionDispatch::IntegrationTest
   setup { @repository = repositories(:one) }
 
   test 'should create a new check' do
