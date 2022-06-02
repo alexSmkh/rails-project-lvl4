@@ -15,14 +15,15 @@ class Web::RepositoriesController < Web::ApplicationController
     already_added_repos = current_user.repositories.map(&:name)
     @repository = current_user.repositories.build
 
-    # rubocop:disable Performance/InefficientHashSearch
-    @repository_full_names = github_client
-      .repos
-      .filter { |repo| repo[:language].present? }
-      .filter { |repo| Repository.language.values.include?(repo[:language]&.downcase) }
-      .filter { |repo| already_added_repos.exclude?(repo[:name]) }
-      .map { |repo| [repo[:full_name], repo[:full_name]] }
-    # rubocop:enable Performance/InefficientHashSearch
+    @repository_full_names = Rails.cache.fetch("user_#{current_user.id}_repos", expires_in: 1.minute) do
+      # rubocop:disable Performance/InefficientHashSearch
+      github_client
+        .repos
+        .filter { |repo| Repository.language.values.include?(repo[:language]&.downcase) }
+        .filter { |repo| already_added_repos.exclude?(repo[:name]) }
+        .map { |repo| [repo[:full_name], repo[:full_name]] }
+      # rubocop:enable Performance/InefficientHashSearch
+    end
   end
 
   def create
