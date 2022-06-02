@@ -47,5 +47,5 @@ Rails/FilePath:
 Lint/RedundantCopDisableDirective:
   Enabled: false
 
-Layout/MultilineMethodCallIndentation
+Layout/MultilineMethodCallIndentation:
   Enabled: false

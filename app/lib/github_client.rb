@@ -16,4 +16,13 @@ class GithubClient
   def commits(repo_full_name)
     @client.commits(repo_full_name)
   end
+
+  def create_hook(repo_full_name, api_url)
+    @client.create_hook(
+      repo_full_name,
+      'web',
+      { url: api_url, content_type: 'json' },
+      { events: ['push'], active: true }
+    )
+  end
 end

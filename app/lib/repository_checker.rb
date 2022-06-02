@@ -44,8 +44,7 @@ class RepositoryChecker
   def check_ruby
     lint_command = "bundle exec rubocop #{@repository_directory_path} --format json"
 
-    raw_check_result =
-      Open3.popen3(lint_command) { |_stdin, stdout| stdout.read }
+    raw_check_result = Open3.popen3(lint_command) { |_stdin, stdout| stdout.read }
     check_result = JSON.parse(raw_check_result)
 
     results_with_issues = check_result['files'].filter { |file_check_result| file_check_result['offenses'].any? }
@@ -73,8 +72,7 @@ class RepositoryChecker
     lint_command =
       "yarn run eslint #{@repository_directory_path} --config #{Rails.root.join('.eslintrc.yml')} --format json --no-eslintrc"
 
-    raw_check_result =
-      Open3.popen3(lint_command) { |_stdin, stdout| stdout.read }
+    raw_check_result = Open3.popen3(lint_command) { |_stdin, stdout| stdout.read }
     check_result = JSON.parse(raw_check_result[/\[.*]/])
 
     issue_messages =

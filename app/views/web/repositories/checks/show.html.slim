@@ -21,7 +21,7 @@
         td = Repository::Check.human_attribute_name(:issue_count)
         td = @check.created? || @check.checking? ? render('shared/spinner') : @check.issue_count
 
-  - if @check.checked? & @check.issue_count.positive?
+  - if @issue_messages.present?
     table.table.mb-3
       thead
         tr
