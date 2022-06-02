@@ -20,10 +20,23 @@
             th.fw-bold = t('.last_check_passed')
         tbody
           - @repositories.each do |repo|
-            tr
-              td
-                = link_to repo.name, repository_path(repo), class: 'text-decoration-none'
-              td
-                = repo.language
-              td
-                = repo.checks.empty? ? t('.no_checks_yet') : repo.checks.last&.result
+            - if repo.fetched?
+              tr
+                td
+                  = link_to repo.name, repository_path(repo), class: 'text-decoration-none'
+                td
+                  = repo.language
+                td
+                  - if repo.checks.last.nil? || repo.checks.last.result.nil?
+                    = render('shared/spinner')
+                  - else
+                    = repo.checks.last.result
+
+            - else
+              tr
+                td
+                  = link_to repo.full_name.split('/').last, '#', class: 'text-decoration-none'
+                td
+                  = render('shared/spinner')
+                td
+                  = render('shared/spinner')
