@@ -10,16 +10,19 @@ class Web::RepositoriesController < Web::ApplicationController
   end
 
   def new
-    authorize Repository
+    authorize :repository
+
     already_added_repos = current_user.repositories.map(&:name)
     @repository = current_user.repositories.build
-    repositories =
-      @github_client.repos.filter do |repo|
-        # rubocop:disable Performance/InefficientHashSearch
-        Repository.language.values.include?(repo[:language]&.downcase) && already_added_repos.exclude?(repo[:name])
-        # rubocop:enable Performance/InefficientHashSearch
-      end
-    @repository_full_names = repositories.map { |repo| [repo[:full_name], repo[:full_name]] }
+
+    # rubocop:disable Performance/InefficientHashSearch
+    @repository_full_names = github_client
+      .repos
+      .filter { |repo| repo[:language].present? }
+      .filter { |repo| Repository.language.values.include?(repo[:language]&.downcase) }
+      .filter { |repo| already_added_repos.exclude?(repo[:name]) }
+      .map { |repo| [repo[:full_name], repo[:full_name]] }
+    # rubocop:enable Performance/InefficientHashSearch
   end
 
   def create
