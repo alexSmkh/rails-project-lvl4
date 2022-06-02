@@ -34,7 +34,7 @@
           th.fw-bold = Repository::Check.human_attribute_name(:id)
           th.fw-bold = Repository::Check.human_attribute_name(:state)
           th.fw-bold = t('.reference')
-          th.fw-bold = Repository::Check.human_attribute_name(:result)
+          th.fw-bold = Repository::Check.human_attribute_name(:passed)
           th.fw-bold = Repository::Check.human_attribute_name(:created_at)
       tbody
         - @checks.each do |check|
@@ -47,7 +47,7 @@
               - reference_sha = link_to check.reference_sha, check.reference_url
               = check.created? || check.checking? ? render('shared/spinner') : reference_sha
             td
-              = check.created? || check.checking? ? render('shared/spinner') : check.result
+              = check.created? || check.checking? ? render('shared/spinner') : check.passed
             td
               = check.created_at.strftime('%Y-%m-%d %H:%M')
   end

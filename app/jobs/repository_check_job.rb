@@ -15,7 +15,7 @@ class RepositoryCheckJob < ApplicationJob
     commit_reference = github_client.commits(repository.github_id).first
 
     if check.update(
-      result: results[:issue_count].zero?,
+      passed: results[:issue_count].zero?,
       issue_count: results[:issue_count],
       issue_messages: results[:issue_messages],
       reference_sha: commit_reference[:sha],
@@ -23,7 +23,7 @@ class RepositoryCheckJob < ApplicationJob
     )
       check.complete!
       CheckMailer.with(check: check)
-                 .send(check.result ? :check_passed : :check_failed)
+                 .send(check.passed ? :check_passed : :check_failed)
                  .deliver_later
     else
       check.fail!

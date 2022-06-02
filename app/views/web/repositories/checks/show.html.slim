@@ -15,8 +15,8 @@
         td = Repository::Check.human_attribute_name(:status)
         td = @check.aasm.human_state
       tr
-        td = Repository::Check.human_attribute_name(:result)
-        td = @check.created? || @check.checking? ? render('shared/spinner') : @check.result
+        td = Repository::Check.human_attribute_name(:passed)
+        td = @check.created? || @check.checking? ? render('shared/spinner') : @check.passed
       tr
         td = Repository::Check.human_attribute_name(:issue_count)
         td = @check.created? || @check.checking? ? render('shared/spinner') : @check.issue_count

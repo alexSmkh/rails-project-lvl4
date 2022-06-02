@@ -19,7 +19,7 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
 
     check = Repository::Check.last
 
-    assert { !check.result }
+    assert { !check.passed }
     assert { check.issue_count == 1 }
   end
 

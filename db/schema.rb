@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_02_201036) do
+ActiveRecord::Schema.define(version: 2022_06_02_220041) do
 
   create_table "repositories", force: :cascade do |t|
     t.string "name"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2022_06_02_201036) do
     t.string "aasm_state"
     t.string "reference_sha"
     t.string "reference_url"
-    t.boolean "result"
+    t.boolean "passed"
     t.integer "issue_count"
     t.text "issue_messages"
     t.integer "repository_id", null: false

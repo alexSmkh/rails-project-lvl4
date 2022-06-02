@@ -2,7 +2,7 @@
 
 one:
   aasm_state: checked
-  result: true
+  passed: true
   issue_count: 0
   repository: one
   issue_messages: '[]'
