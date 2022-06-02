@@ -21,7 +21,7 @@ class Web::RepositoriesController < Web::ApplicationController
         .repos
         .filter { |repo| Repository.language.values.include?(repo[:language]&.downcase) }
         .filter { |repo| already_added_repos.exclude?(repo[:name]) }
-        .map { |repo| [repo[:full_name], repo[:full_name]] }
+        .map { |repo| [repo[:full_name], repo[:id]] }
       # rubocop:enable Performance/InefficientHashSearch
     end
   end
@@ -29,7 +29,7 @@ class Web::RepositoriesController < Web::ApplicationController
   def create
     authorize :repository
 
-    repository = current_user.repositories.build(full_name: params[:repository][:full_name])
+    repository = current_user.repositories.build(github_id: params[:repository][:github_id])
 
     if repository.save
       RepositoryLoaderJob.perform_later(repository)

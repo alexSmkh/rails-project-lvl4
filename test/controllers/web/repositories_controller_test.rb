@@ -27,11 +27,18 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
         symbolize_names: true
       )
 
-    post repositories_path, params: { repository: repo_fixture }
+    perform_enqueued_jobs do
+      post repositories_path,
+           params: {
+             repository: {
+               github_id: repo_fixture[:id]
+             }
+           }
+    end
 
     assert_redirected_to repositories_path
 
-    new_repo = Repository.find_by(full_name: repo_fixture[:full_name])
-    assert { new_repo }
+    new_repo = Repository.find_by(github_id: repo_fixture[:id])
+    assert { new_repo.full_name == repo_fixture[:full_name] }
   end
 end

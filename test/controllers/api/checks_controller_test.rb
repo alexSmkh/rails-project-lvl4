@@ -10,7 +10,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
       post api_checks_url,
            params: {
              repository: {
-               full_name: @repository.full_name
+               id: @repository.github_id
              }
            }
     end

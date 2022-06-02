@@ -12,7 +12,7 @@ class RepositoryCheckJob < ApplicationJob
     check.check!
 
     results = checker.start_checking
-    commit_reference = github_client.commits(repository.full_name).first
+    commit_reference = github_client.commits(repository.github_id).first
 
     if check.update(
       result: results[:issue_count].zero?,
@@ -22,10 +22,11 @@ class RepositoryCheckJob < ApplicationJob
       reference_url: commit_reference[:html_url]
     )
       check.complete!
-      CheckMailer.with(check: check).check_passed.deliver_later
+      CheckMailer.with(check: check)
+                 .send(check.result ? :check_passed : :check_failed)
+                 .deliver_later
     else
       check.fail!
-      CheckMailer.with(check: check).check_failed.deliver_later
     end
   rescue StandardError
     check.fail!

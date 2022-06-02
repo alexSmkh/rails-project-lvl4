@@ -9,7 +9,7 @@ class RepositoryLoaderJob < ApplicationJob
     repository.fetch!
     github_client =
       ApplicationContainer[:github_client].new(repository.user.token)
-    repo = github_client.repo(repository.full_name)
+    repo = github_client.repo(repository.github_id)
 
     if repository.update(
       html_url: repo[:html_url],
@@ -22,7 +22,7 @@ class RepositoryLoaderJob < ApplicationJob
     )
       repository.complete!
       RepositoryCheckJob.perform_later(repository.checks.create)
-      github_client.create_hook(repository.full_name, api_checks_url)
+      github_client.create_hook(repository.github_id, api_checks_url)
     else
       repository.fail!
     end

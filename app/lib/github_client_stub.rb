@@ -5,7 +5,7 @@ class GithubClientStub
   def initialize(_user_token); end
   # rubocop:enable Style/RedundantInitialize
 
-  def repo(_full_name)
+  def repo(_github_id)
     fixture_to_hash('repository.json')
   end
 
@@ -13,11 +13,11 @@ class GithubClientStub
     fixture_to_hash('repositories.json')
   end
 
-  def commits(_repo_full_name)
+  def commits(_github_id)
     fixture_to_hash('commits.json')
   end
 
-  def create_hook(_repo_full_name, _api_url); end
+  def create_hook(_github_id, _api_url); end
 
   private
 

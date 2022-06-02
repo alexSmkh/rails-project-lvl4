@@ -5,21 +5,21 @@ class GithubClient
     @client = Octokit::Client.new(access_token: user_token, per_page: 100)
   end
 
-  def repo(full_name)
-    @client.repo(full_name)
+  def repo(github_id)
+    @client.repo(github_id)
   end
 
   def repos
     @client.repos
   end
 
-  def commits(repo_full_name)
-    @client.commits(repo_full_name)
+  def commits(github_id)
+    @client.commits(github_id)
   end
 
-  def create_hook(repo_full_name, api_url)
+  def create_hook(github_id, api_url)
     @client.create_hook(
-      repo_full_name,
+      github_id,
       'web',
       { url: api_url, content_type: 'json' },
       { events: ['push'], active: true }
