@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Web::Repositories::ChecksController < Web::Repositories::ApplicationController
+  before_action :auth_user!
+
   def create
     check = Repository::Check.new(repository_id: params[:repository_id])
 
@@ -14,6 +16,6 @@ class Web::Repositories::ChecksController < Web::Repositories::ApplicationContro
 
   def show
     @check = Repository::Check.find(params[:id])
-    @issue_messages = JSON.parse(@check.issue_messages, symbolize_names: true) if @check.checked? && @check.issue_count.positive?
+    @issue_messages = JSON.parse(@check.issue_messages, symbolize_names: true) if @check.finished? && @check.issue_count.positive?
   end
 end

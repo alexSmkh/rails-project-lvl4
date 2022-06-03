@@ -1,9 +1,8 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  aasm_state: checked
+  aasm_state: finished
   passed: true
   issue_count: 0
   repository: one
   issue_messages: '[]'
-

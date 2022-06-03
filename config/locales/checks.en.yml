@@ -5,7 +5,7 @@ en:
         states:
           created: Created
           checking: Checking
-          checked: Checkedddddd
+          finished: Checked
           failed: Failed
         create:
           success: 'The check was successfully created'

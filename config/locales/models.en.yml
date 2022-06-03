@@ -16,6 +16,6 @@ en:
         aasm_state:
           created: Created
           checking: Checking
-          checked: Checked
+          finished: Checked
           failed: Failed
 
