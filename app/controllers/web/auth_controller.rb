@@ -2,12 +2,9 @@
 
 class Web::AuthController < Web::ApplicationController
   def callback
-    user = User.find_by(email: auth.info.email)
-    user ||= User.new(
-      nickname: auth.info.nickname,
-      email: auth.info.email,
-      token: auth.credentials.token
-    )
+    user = User.find_or_initialize_by(email: auth.info.email)
+    user.nickname = auth.info.nickname
+    user.token = auth.credentials.token
 
     if user.save
       sign_in user
