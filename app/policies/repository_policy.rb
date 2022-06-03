@@ -9,10 +9,6 @@ class RepositoryPolicy < ApplicationPolicy
     record.user_id == user.id
   end
 
-  def new?
-    user
-  end
-
   def create?
     user
   end
