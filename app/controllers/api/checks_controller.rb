@@ -8,6 +8,11 @@ class Api::ChecksController < Api::ApplicationController
     return if repository.nil?
 
     check = repository.checks.build
-    RepositoryCheckJob.perform_later(check) if check.save
+    if check.save
+      RepositoryCheckJob.perform_later(check)
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 end
