@@ -6,6 +6,8 @@ class Api::ChecksController < Api::ApplicationController
   def checks
     repository = Repository.find_by(github_id: params[:repository][:id])
 
+    return head :ok if repository.nil?
+
     check = repository.checks.create
     RepositoryCheckJob.perform_later(check)
     head :ok
