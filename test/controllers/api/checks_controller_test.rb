@@ -14,5 +14,7 @@ class Api::ChecksControllerTest < ActionDispatch::IntegrationTest
              }
            }
     end
+
+    assert_response 200
   end
 end

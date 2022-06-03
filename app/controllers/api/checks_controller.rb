@@ -5,14 +5,9 @@ class Api::ChecksController < Api::ApplicationController
 
   def checks
     repository = Repository.find_by(github_id: params[:repository][:id])
-    return if repository.nil?
 
-    check = repository.checks.build
-    if check.save
-      RepositoryCheckJob.perform_later(check)
-      head :ok
-    else
-      head :unprocessable_entity
-    end
+    check = repository.checks.create
+    RepositoryCheckJob.perform_later(check)
+    head :ok
   end
 end
