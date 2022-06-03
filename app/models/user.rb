@@ -12,11 +12,4 @@ class User < ApplicationRecord
             format: {
               with: URI::MailTo::EMAIL_REGEXP
             }
-  validates :nickname,
-            presence: true,
-            uniqueness: true,
-            length: {
-              minimum: 2,
-              maximum: 50
-            }
 end
