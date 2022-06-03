@@ -13,14 +13,12 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
   test 'should create new check' do
     repository = repositories(:one)
 
-    perform_enqueued_jobs do
-      post repository_checks_path(repository.id)
-    end
+    post repository_checks_path(repository.id)
 
     check = Repository::Check.last
 
-    assert { !check.passed }
-    assert { check.issue_count == 1 }
+    assert { check }
+    assert_enqueued_with job: RepositoryCheckJob, args: [check]
   end
 
   test 'should get show' do
