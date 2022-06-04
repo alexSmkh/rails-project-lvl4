@@ -20,6 +20,6 @@ class Web::Repositories::ChecksController < Web::Repositories::ApplicationContro
     @check = Repository::Check.find(params[:id])
     authorize @check
 
-    @issue_messages = JSON.parse(@check.issue_messages, symbolize_names: true) if @check.finished? && @check.issue_count.positive?
+    @issue_messages = JSON.parse(@check.issue_messages, symbolize_names: true)
   end
 end
