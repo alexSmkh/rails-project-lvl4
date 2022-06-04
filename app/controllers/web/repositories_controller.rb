@@ -41,7 +41,7 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def show
     @repository = Repository.includes(:checks).find(params[:id])
-    @checks = @repository.checks.reverse
+    @checks = @repository.checks.order(:desc)
     authorize @repository
   end
 
