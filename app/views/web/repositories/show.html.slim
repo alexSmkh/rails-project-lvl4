@@ -14,10 +14,10 @@
     = @repository.language
   p
     span.fw-bolder.me-3 = Repository.human_attribute_name(:repo_created_at)
-    = @repository.repo_created_at.strftime('%Y-%m-%d %H:%M')
+    = @repository.repo_created_at&.strftime('%Y-%m-%d %H:%M')
   p
     span.fw-bolder.me-3 = Repository.human_attribute_name(:repo_updated_at)
-    = @repository.repo_updated_at.strftime('%Y-%m-%d %H:%M')
+    = @repository.repo_updated_at&.strftime('%Y-%m-%d %H:%M')
 
   hr
 
