@@ -8,7 +8,9 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-Dotenv::Railtie.load
+if %w[development test].include? ENV.fetch('RAILS_ENV', nil)
+  Dotenv::Railtie.load
+end
 
 module RailsProjectLvl4
   class Application < Rails::Application
