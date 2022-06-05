@@ -25,7 +25,7 @@ class RepositoryLoaderJob < ApplicationJob
     else
       repository.fail!
     end
-  # rescue StandardError
-  #   repository.fail!
+  rescue StandardError
+    repository.fail!
   end
 end
