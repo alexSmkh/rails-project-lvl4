@@ -27,12 +27,7 @@
                 td
                   = repo.language
                 td
-                  - if repo.checks.last.failed?
-                    = nil
-                  - elsif repo.checks.last.nil? || repo.checks.last.passed.nil?
-                    = render('shared/spinner')
-                  - else
-                    = repo.checks.last.passed
+                  = repo.checks.last&.passed
 
             - else
               tr

@@ -13,3 +13,4 @@ en:
         failed: The repository has not been added
       show:
         reference: Reference
+        check_failed: The check failed
