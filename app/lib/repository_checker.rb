@@ -32,7 +32,7 @@ class RepositoryChecker
       delete_directory
     end
 
-    FileUtils.mkdir @repository_directory_path
+    FileUtils.mkdir_p @repository_directory_path
   end
 
   def clone_repository
