@@ -27,8 +27,15 @@
                 td
                   = repo.language
                 td
-                  = repo.checks.last&.passed
-
+                  - last_check = repo.checks.last
+                  - if last_check.nil?
+                    = t('.no_checks_yet')
+                  - elsif last_check.finished?
+                    = last_check.passed
+                  - elsif last_check.failed?
+                    = t('.check_failed')
+                  - else
+                    = render('shared/spinner')
             - else
               tr
                 td
