@@ -6,7 +6,7 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def index
     authorize Repository
-    @repositories = current_user.repositories.includes(:checks)
+    @repositories = current_user.repositories.includes(:checks).order(name: :asc)
   end
 
   def new
