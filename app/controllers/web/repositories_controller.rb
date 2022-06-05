@@ -13,16 +13,15 @@ class Web::RepositoriesController < Web::ApplicationController
     authorize :repository
 
     already_added_repos = current_user.repositories.map(&:name)
+    acceptable_languages = Repository.language.values
     @repository = current_user.repositories.build
 
     @repository_full_names = Rails.cache.fetch("user_#{current_user.id}_repos", expires_in: 1.minute) do
-      # rubocop:disable Performance/InefficientHashSearch
       github_client
         .repos
-        .filter { |repo| Repository.language.values.include?(repo[:language]&.downcase) }
+        .filter { |repo| acceptable_languages.include?(repo[:language]&.downcase) }
         .filter { |repo| already_added_repos.exclude?(repo[:name]) }
         .map { |repo| [repo[:full_name], repo[:id]] }
-      # rubocop:enable Performance/InefficientHashSearch
     end
   end
 
@@ -41,7 +40,7 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def show
     @repository = Repository.includes(:checks).find(params[:id])
-    @checks = @repository.checks.order(:desc)
+    @checks = @repository.checks.order(created_at: :desc)
     authorize @repository
   end
 

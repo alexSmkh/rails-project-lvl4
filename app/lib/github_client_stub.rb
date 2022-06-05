@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 class GithubClientStub
-  # rubocop:disable Style/RedundantInitialize
   def initialize(_user_token); end
-  # rubocop:enable Style/RedundantInitialize
 
   def repo(_github_id)
     fixture_to_hash('repository.json')
