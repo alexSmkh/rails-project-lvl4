@@ -21,12 +21,11 @@ class RepositoryLoaderJob < ApplicationJob
       repo_updated_at: repo[:updated_at]
     )
       repository.complete!
-      RepositoryCheckJob.perform_later(repository.checks.create)
       github_client.create_hook(repository.github_id, api_checks_url)
     else
       repository.fail!
     end
-  rescue StandardError
-    repository.fail!
+  # rescue StandardError
+  #   repository.fail!
   end
 end
