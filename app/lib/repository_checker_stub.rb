@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RepositoryCheckerStub
-  def initialize(_repository); end
+  def initialize(_repository); end  # rubocop:disable
 
   def start_checking
     issue_messages = File.read(Rails.root.join('test/fixtures/files/check_results.json'))
