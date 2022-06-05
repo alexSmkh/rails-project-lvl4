@@ -42,7 +42,7 @@ class RepositoryChecker
   end
 
   def check_ruby
-    lint_command = "bundle exec rubocop #{@repository_directory_path} --format json"
+    lint_command = "bundle exec rubocop #{@repository_directory_path} --format json -c .rubocop.yml"
 
     raw_check_result = Open3.popen3(lint_command) { |_stdin, stdout| stdout.read }
     check_result = JSON.parse(raw_check_result)
@@ -70,7 +70,7 @@ class RepositoryChecker
 
   def check_js
     lint_command =
-      "yarn run eslint #{@repository_directory_path} --config #{Rails.root.join('.eslintrc.yml')} --format json --no-eslintrc"
+      "yarn run eslint #{@repository_directory_path} --config .eslintrc.yml --format json --no-eslintrc"
 
     raw_check_result = Open3.popen3(lint_command) { |_stdin, stdout| stdout.read }
     check_result = JSON.parse(raw_check_result[/\[.*]/])
