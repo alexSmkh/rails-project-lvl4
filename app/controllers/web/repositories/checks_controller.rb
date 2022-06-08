@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class Web::Repositories::ChecksController < Web::Repositories::ApplicationController
-  before_action :auth_user!
-
   def create
+    auth_user!
     authorize Repository::Check
 
     check = Repository::Check.new(repository_id: params[:repository_id])
@@ -17,6 +16,7 @@ class Web::Repositories::ChecksController < Web::Repositories::ApplicationContro
   end
 
   def show
+    auth_user!
     @check = Repository::Check.find(params[:id])
     authorize @check
 

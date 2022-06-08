@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
 class Web::RepositoriesController < Web::ApplicationController
-  before_action :auth_user!
-  before_action :github_client, only: %i[new create]
-
   def index
+    auth_user!
     authorize Repository
     @repositories = current_user.repositories.includes(:checks).order(name: :asc).page(params[:page])
   end
 
   def new
+    auth_user!
     authorize :repository
+
+    github_client = ApplicationContainer[:github_client].new(current_user.token)
 
     already_added_repos = current_user.repositories.map(&:name)
     acceptable_languages = Repository.language.values
@@ -26,6 +27,7 @@ class Web::RepositoriesController < Web::ApplicationController
   end
 
   def create
+    auth_user!
     authorize :repository
 
     repository = current_user.repositories.build(github_id: params[:repository][:github_id])
@@ -39,6 +41,7 @@ class Web::RepositoriesController < Web::ApplicationController
   end
 
   def show
+    auth_user!
     @repository = Repository.includes(:checks).find(params[:id])
     @checks = @repository.checks.order(created_at: :desc).page(params[:page])
     authorize @repository
@@ -46,8 +49,7 @@ class Web::RepositoriesController < Web::ApplicationController
 
   private
 
-  def github_client
-    @github_client ||=
-      ApplicationContainer[:github_client].new(current_user.token)
+  def set_github_client
+    ApplicationContainer[:github_client].new(current_user.token)
   end
 end
