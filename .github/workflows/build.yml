@@ -15,8 +15,6 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.0.2'
-      - name: Install bundler
-        run: gem install bundler
 
       - name: Install dependencies
         run: make install
