@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   namespace :api do
-    post 'checks', to: 'checks#checks'
+    resources :checks, only: :create, method: :post
   end
 
   namespace :web do
