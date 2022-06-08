@@ -5,11 +5,6 @@ Rails.application.routes.draw do
     resources :checks, only: :create, method: :post
   end
 
-  namespace :web do
-    get 'repositories/index'
-    get 'repositories/create'
-    get 'repositories/show'
-  end
   scope module: 'web' do
     post 'auth/:provider', to: 'auth#request', as: :auth_request
     get 'auth/:provider/callback', to: 'auth#callback', as: :callback_auth
