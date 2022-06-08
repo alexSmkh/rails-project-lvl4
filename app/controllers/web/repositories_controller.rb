@@ -6,7 +6,7 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def index
     authorize Repository
-    @repositories = current_user.repositories.includes(:checks).order(name: :asc)
+    @repositories = current_user.repositories.includes(:checks).order(name: :asc).page(params[:page])
   end
 
   def new
@@ -40,7 +40,7 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def show
     @repository = Repository.includes(:checks).find(params[:id])
-    @checks = @repository.checks.order(created_at: :desc)
+    @checks = @repository.checks.order(created_at: :desc).page(params[:page])
     authorize @repository
   end
 

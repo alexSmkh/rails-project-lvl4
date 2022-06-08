@@ -44,3 +44,7 @@
                   = render('shared/spinner')
                 td
                   = render('shared/spinner')
+
+    = paginate @repositories,
+               theme: 'bootstrap-5',
+               pagination_class: 'pagination-sm flex-wrap justify-content-center'

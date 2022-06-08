@@ -7,10 +7,12 @@ ruby '3.0.2'
 
 gem 'aasm', '~> 5.2'
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'bootstrap5-kaminari-views', '~> 0.0.1'
 gem 'dry-container'
 gem 'enumerize'
 gem 'faker'
 gem 'jbuilder', '~> 2.7'
+gem 'kaminari', '~> 1.2'
 gem 'octokit', '~> 4.0'
 gem 'omniauth'
 gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
