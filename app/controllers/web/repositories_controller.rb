@@ -3,13 +3,11 @@
 class Web::RepositoriesController < Web::ApplicationController
   def index
     auth_user!
-    authorize Repository
     @repositories = current_user.repositories.includes(:checks).order(name: :asc).page(params[:page])
   end
 
   def new
     auth_user!
-    authorize :repository
 
     github_client = ApplicationContainer[:github_client].new(current_user.token)
 
@@ -28,7 +26,6 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def create
     auth_user!
-    authorize :repository
 
     repository = current_user.repositories.build(github_id: params[:repository][:github_id])
 

@@ -3,9 +3,11 @@
 class Web::Repositories::ChecksController < Web::Repositories::ApplicationController
   def create
     auth_user!
-    authorize Repository::Check
 
-    check = Repository::Check.new(repository_id: params[:repository_id])
+    repository = Repository.find(params[:repository_id])
+    check = repository.checks.build
+
+    authorize check
 
     if check.save
       RepositoryCheckJob.perform_later(check)
