@@ -1,5 +1,5 @@
 p
-  = "#{link_to repository_url(@repository), @repository.name.capitalize} did not pass checking!"
+  = "#{link_to @repository.name.capitalize, repository_url(@repository)} did not pass checking!"
 
 p
   = "Details can be found #{link_to 'here', repository_check_url(@repository, @check)}."
