@@ -2,7 +2,7 @@
   - if @repositories.empty?
     .d-flex.flex-column.justify-content-center.h-100.text-center.align-middle
       div
-        p.fs-3.fw-bolder.text-center = i18n('.no_repositories_yet')
+        p.fs-3.fw-bolder.text-center = t('.no_repositories_yet')
         = link_to new_repository_path, class: 'btn btn-primary text-center' do
           i.fa-solid.fa-plus.me-2
           span = t('.add_repository')
