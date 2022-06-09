@@ -11,6 +11,7 @@ en:
           success: 'The check was successfully created'
           fail: 'The check was not created'
         show:
+          check: Check
           message: Message
           rule: Rule
           line_column: Line column
