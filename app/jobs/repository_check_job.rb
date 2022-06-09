@@ -5,7 +5,7 @@ class RepositoryCheckJob < ApplicationJob
 
   def perform(check)
     repository = check.repository
-    checker = ApplicationContainer[:repository_checker].new(repository)
+    checker = ApplicationContainer[:repository_check].call(repository)
     github_client =
       ApplicationContainer[:github_client].new(repository.user.token)
 

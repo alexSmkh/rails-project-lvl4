@@ -2,47 +2,44 @@
 
 require 'fileutils'
 
-class RepositoryChecker
-  def initialize(repository)
-    @repository = repository
-    @repository_directory_path = Rails.root.join('tmp', 'repositories', @repository.name)
-  end
+class RepositoryCheck
+  def self.start_checking(repository)
+    repository_directory_path = Rails.root.join('tmp', 'repositories', repository.name)
 
-  def start_checking
     check_functions = {
       javascript: -> { check_js },
       ruby: -> { check_ruby }
     }
 
-    create_directory
-    clone_repository
-    results = check_functions[@repository.language.to_sym].call
-    delete_directory
+    create_directory(repository_directory_path)
+    clone_repository(repository.clone_url, repository_directory_path)
+    results = check_functions[repository.language.to_sym].call(repository_directory_path)
+    delete_directory(repository_directory_path)
     results
   end
 
   private
 
-  def delete_directory
-    FileUtils.rm_rf @repository_directory_path
+  def delete_directory(repository_directory_path)
+    FileUtils.rm_rf repository_directory_path
   end
 
-  def create_directory
-    if Dir.exist? @repository_directory_path
+  def create_directory(repository_directory_path)
+    if Dir.exist? repository_directory_path
       delete_directory
     end
 
-    FileUtils.mkdir_p @repository_directory_path
+    FileUtils.mkdir_p repository_directory_path
   end
 
-  def clone_repository
+  def clone_repository(clone_url, repository_directory_path)
     clone_command =
-      "git clone #{@repository.clone_url} #{@repository_directory_path}"
+      "git clone #{clone_url} #{repository_directory_path}"
     Open3.popen3(clone_command) { |_stdin, stdout| stdout.read }
   end
 
-  def check_ruby
-    lint_command = "bundle exec rubocop #{@repository_directory_path} --format json -c .rubocop.yml"
+  def check_ruby(repository_directory_path)
+    lint_command = "bundle exec rubocop #{repository_directory_path} --format json -c .rubocop.yml"
 
     raw_check_result = Open3.popen3(lint_command) { |_stdin, stdout| stdout.read }
     check_result = JSON.parse(raw_check_result)
@@ -68,9 +65,9 @@ class RepositoryChecker
     }
   end
 
-  def check_js
+  def check_js(repository_directory_path)
     lint_command =
-      "yarn run eslint #{@repository_directory_path} --config .eslintrc.yml --format json --no-eslintrc"
+      "yarn run eslint #{repository_directory_path} --config .eslintrc.yml --format json --no-eslintrc"
 
     raw_check_result = Open3.popen3(lint_command) { |_stdin, stdout| stdout.read }
     check_result = JSON.parse(raw_check_result[/\[.*]/])
