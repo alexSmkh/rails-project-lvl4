@@ -18,9 +18,10 @@ class Web::RepositoriesController < Web::ApplicationController
     @repository_full_names = Rails.cache.fetch("user_#{current_user.id}_repos", expires_in: 1.minute) do
       github_client
         .repos
-        .filter { |repo| acceptable_languages.include?(repo[:language]&.downcase) }
-        .filter { |repo| already_added_repos.exclude?(repo[:name]) }
-        .map { |repo| [repo[:full_name], repo[:id]] }
+        .filter do |repo|
+          acceptable_languages.include?(repo[:language]&.downcase) &&
+            already_added_repos.exclude?(repo[:name])
+        end
     end
   end
 

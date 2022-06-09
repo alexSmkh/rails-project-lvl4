@@ -4,4 +4,6 @@
              model: @repository,
              model_field: :github_id,
              collection: @repository_full_names,
-             label: 'Github'
+             label: 'Github',
+             value_method: :id,
+             label_method: :full_name

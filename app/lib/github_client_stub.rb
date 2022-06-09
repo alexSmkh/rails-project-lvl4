@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
+require 'ostruct'
 class GithubClientStub
-  def initialize(_user_token); end  # rubocop:disable
+  def initialize(_user_token); end # rubocop:disable
 
   def repo(_github_id)
     fixture_to_hash('repository.json')
@@ -20,9 +21,11 @@ class GithubClientStub
   private
 
   def fixture_to_hash(filename)
+    # rubocop:disable Style/OpenStructUse
     JSON.parse(
       File.read(Rails.root.join('test/fixtures/files', filename)),
-      symbolize_names: true
+      object_class: OpenStruct
     )
+    # rubocop:enable Style/OpenStructUse
   end
 end

@@ -2,5 +2,7 @@
   .mb-2
     = f.input model_field,
               label: label,
-              collection: collection
+              collection: collection,
+              value_method: value_method,
+              label_method: label_method
   = f.submit class: 'btn btn-primary'
