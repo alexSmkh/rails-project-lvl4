@@ -1,0 +1,9 @@
+- if flash[:notice].present?
+  .alert.alert-primary.alert-dismissible.fade.show role='alert'
+    = sanitize build_flash_messages(notice)
+    button.btn-close type='button' data-bs-dismiss='alert' area-label='Close'
+
+- if flash[:alert].present?
+  .alert.alert-danger.alert-dismissible.fade.show role='alert'
+    = sanitize build_flash_messages(alert)
+    button.btn-close type='button' data-bs-dismiss='alert' area-label='Close'

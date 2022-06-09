@@ -11,15 +11,7 @@ html
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
 
   body.d-flex.flex-column.vh-100
-    - if flash[:notice].present?
-        .alert.alert-primary.alert-dismissible.fade.show role='alert'
-          = sanitize build_flash(notice)
-          button.btn-close type='button' data-bs-dismiss='alert' area-label='Close'
-
-    - if flash[:alert].present?
-        .alert.alert-danger.alert-dismissible.fade.show role='alert'
-          = sanitize build_flash(alert)
-          button.btn-close type='button' data-bs-dismiss='alert' area-label='Close'
+    = render 'shared/flashes'
 
     header.container
       nav.d-flex.justify-content-between.align-items-center.p-3
