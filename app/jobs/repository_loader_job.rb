@@ -11,7 +11,7 @@ class RepositoryLoaderJob < ApplicationJob
       ApplicationContainer[:github_client].new(repository.user.token)
     repo = github_client.repo(repository.github_id)
 
-    if repository.update(
+    repository.update!(
       html_url: repo[:html_url],
       clone_url: repo[:clone_url],
       full_name: repo[:full_name],
@@ -20,11 +20,8 @@ class RepositoryLoaderJob < ApplicationJob
       repo_created_at: repo[:created_at],
       repo_updated_at: repo[:updated_at]
     )
-      repository.complete!
-      github_client.create_hook(repository.github_id, api_checks_url)
-    else
-      repository.fail!
-    end
+    repository.complete!
+    github_client.create_hook(repository.github_id, api_checks_url)
   rescue StandardError
     repository.fail!
   end
