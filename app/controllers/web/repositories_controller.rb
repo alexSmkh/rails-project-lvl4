@@ -41,8 +41,8 @@ class Web::RepositoriesController < Web::ApplicationController
   def show
     auth_user!
     @repository = Repository.includes(:checks).find(params[:id])
-    @checks = @repository.checks.order(created_at: :desc).page(params[:page])
     authorize @repository
+    @checks = @repository.checks.order(created_at: :desc).page(params[:page])
   end
 
   private
