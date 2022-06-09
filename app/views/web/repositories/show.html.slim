@@ -38,40 +38,32 @@
           th.fw-bold = Repository::Check.human_attribute_name(:created_at)
       tbody
         - @checks.each do |check|
-          - if check.created? || check.checking?
-            tr
-              td
-                = link_to check.id, repository_check_path(check.repository_id, check.id)
-              td
-                = check.aasm.human_state
+          tr class="#{'table-danger' if check.failed?}"
+            td
+              = link_to check.id, repository_check_path(check.repository_id, check.id)
+            td
+              = check.aasm.human_state
+
+            - if check.created? || check.checking?
+
               td
                 = render('shared/spinner')
               td
                 = render('shared/spinner')
-              td
-                = check.created_at.strftime('%Y-%m-%d %H:%M')
-          - elsif check.failed?
-            tr.table-danger
-              td
-                = link_to check.id, repository_check_path(check.repository_id, check.id)
-              td
-                = check.aasm.human_state
+
+            - elsif check.failed?
+
               td colspan='2'
                 = t('.check_failed')
-              td
-                = check.created_at.strftime('%Y-%m-%d %H:%M')
-          - else
-            tr
-              td
-                = link_to check.id, repository_check_path(check.repository_id, check.id)
-              td
-                = check.aasm.human_state
+
+            - else
+
               td
                 = link_to check.reference_sha, check.reference_url
               td
                 = check.passed
-              td
-                = check.created_at.strftime('%Y-%m-%d %H:%M')
+            td
+              = check.created_at.strftime('%Y-%m-%d %H:%M')
 
     = paginate @checks,
                theme: 'bootstrap-5',
