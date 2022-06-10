@@ -11,11 +11,9 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
   test 'should create new check' do
     repository = repositories(:one)
 
-    post repository_checks_path(repository.id)
-
-    check = Repository::Check.last
-
-    assert { check }
+    assert_difference 'repository.checks.count' do
+      post repository_checks_path(repository.id)
+    end
   end
 
   test 'should get show' do
