@@ -20,8 +20,7 @@ class RepositoryChecker
     private
 
     def check_ruby(repository_directory_path)
-      # check_command = "bundle exec rubocop #{repository_directory_path} --format json -c .rubocop.yml"
-      check_command = "fsfsfsf fsfs"
+      check_command = "bundle exec rubocop #{repository_directory_path} --format json -c .rubocop.yml"
 
       raw_check_result = BashExecutor.run_command(check_command)
       check_result = JSON.parse(raw_check_result)

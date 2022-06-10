@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
+class BashExecutorError < StandardError; end
+
 class BashExecutor
   def self.run_command(command)
     Open3.popen3(command) do |_stdin, stdout, _stderr, wait_thr|
-      raise wait_thr.exitstatus unless wait_thr.value.success?
+      raise BashExecutorError unless wait_thr.value.success?
 
       stdout.read
     end
