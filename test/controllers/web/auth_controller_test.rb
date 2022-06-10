@@ -25,9 +25,9 @@ class Web::AuthControllerTest < ActionDispatch::IntegrationTest
     get callback_auth_url('github')
     assert_response :redirect
 
-    user = User.find_by!(email: auth_hash[:info][:email])
+    user = User.find_by(email: auth_hash[:info][:email])
 
-    assert user
-    assert signed_in?
+    assert { user }
+    assert { signed_in? }
   end
 end
