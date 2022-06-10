@@ -3,8 +3,6 @@
 require 'test_helper'
 
 class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
-  include ActiveJob::TestHelper
-
   setup do
     @user = users(:one)
     sign_in @user
@@ -18,7 +16,6 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
     check = Repository::Check.last
 
     assert { check }
-    assert_enqueued_with job: RepositoryCheckJob, args: [check]
   end
 
   test 'should get show' do
