@@ -15,12 +15,6 @@ Create `.env` file in the root project and write:
   GITHUB_KEY=github_client_id
   GITHUB_SECRET=github_client_secret
   BASE_URL=.... # http://localhost:3000 or (if u use ngrok) ngrok url
-
-  # if you don't want to send real emails that you should create an account at  mailtrap.io. And copy the settings here:
-  MAIL_USERNAME=...
-  MAIL_PASSWORD=...
-  MAIL_HOST=smtp.mailtrap.io
-  SMTP_PORT=2525
 ```
 
 Run this commands:
@@ -42,7 +36,12 @@ Run this commands:
   heroku config:set RAILS_ENV=production
   heroku config:set GITHUB_KEY=github_client_id
   heroku config:set GITHUB_SECRET=github_client_secret
-  heroku config:set EMAIL_FROM=your_mail
+
+  # if you don't want to send real emails that you should create an account at  mailtrap.io. And copy the settings here:
+  MAIL_USERNAME=...
+  MAIL_PASSWORD=...
+  MAIL_HOST=smtp.mailtrap.io
+  SMTP_PORT=2525
 
   make heroku-deploy
 ```
