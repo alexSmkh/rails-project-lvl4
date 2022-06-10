@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class RepositoryLoaderJob < ApplicationJob
-  include Rails.application.routes.url_helpers
-
   queue_as :default
 
   def perform(repository)
@@ -21,7 +19,6 @@ class RepositoryLoaderJob < ApplicationJob
       repo_updated_at: repo[:updated_at]
     )
     repository.complete!
-    github_client.create_hook(repository.github_id, api_checks_url)
   rescue StandardError
     repository.fail!
   end

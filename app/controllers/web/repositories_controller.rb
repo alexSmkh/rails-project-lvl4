@@ -32,6 +32,7 @@ class Web::RepositoriesController < Web::ApplicationController
 
     if repository.save
       RepositoryLoaderJob.perform_later(repository)
+      GithubRepositoryHookJob.perform_later(repository)
       redirect_to repositories_path, notice: t('.success')
     else
       redirect_to new_repository_path, alert: t('.failed')
