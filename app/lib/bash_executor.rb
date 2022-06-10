@@ -1,14 +1,9 @@
 # frozen_string_literal: true
 
-class BashExecutorError < StandardError; end
-
 class BashExecutor
   def self.run_command(command)
-    Open3.popen3(command) do |_stdin, stdout, _stderr, wait_thr|
-      raise BashExecutorError unless wait_thr.value.success?
-
-      stdout.read
-    end
+    _, stdout = Open3.popen3(command)
+    stdout.read
   end
 
   def self.clone_repository(clone_url, directory_path)
