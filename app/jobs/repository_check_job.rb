@@ -25,7 +25,7 @@ class RepositoryCheckJob < ApplicationJob
       .with(check: check)
       .send(check.passed ? :check_passed : :check_failed)
       .deliver_later
-  # rescue StandardError
-  #   check.fail!
+  rescue StandardError
+    check.fail!
   end
 end
