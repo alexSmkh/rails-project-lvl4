@@ -1,4 +1,4 @@
 one:
   nickname: <%= Faker::Internet.username %>
   email: <%= Faker::Internet.email %>
-  token: <%= ENV['OCTOKIT_TEST_GITHUB_TOKEN'] %>
+  token: <%= Faker::Omniauth.github[:credentials][:token] %>
