@@ -1,8 +1,8 @@
 = simple_form_for model do |f|
   .mb-2
-    = f.input model_field,
-              label: label,
+    = f.input :github_id,
+              label: 'Github',
               collection: collection,
-              value_method: value_method,
-              label_method: label_method
+              value_method: :id,
+              label_method: :full_name
   = f.submit class: 'btn btn-primary'
