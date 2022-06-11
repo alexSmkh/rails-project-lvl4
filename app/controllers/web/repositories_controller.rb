@@ -45,10 +45,4 @@ class Web::RepositoriesController < Web::ApplicationController
     authorize @repository
     @checks = @repository.checks.order(created_at: :desc).page(params[:page])
   end
-
-  private
-
-  def set_github_client
-    ApplicationContainer[:github_client].new(current_user.token)
-  end
 end
