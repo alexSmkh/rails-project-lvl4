@@ -23,5 +23,6 @@ class Web::SessionsControllerTest < ActionDispatch::IntegrationTest
     delete session_path(user)
 
     assert_redirected_to root_path
+    assert_not signed_in?
   end
 end

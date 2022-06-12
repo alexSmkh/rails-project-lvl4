@@ -7,3 +7,13 @@ one:
   user: one
   repo_created_at: Wed, 03 Jun 2020 16:34:18.000000000 UTC +00:00
   repo_updated_at: Fri, 21 Aug 2020 17:55:56.000000000 UTC +00:00
+
+blank:
+  github_id: 363063309
+  html_url:
+  name:
+  full_name:
+  language:
+  user: one
+  repo_created_at:
+  repo_updated_at:

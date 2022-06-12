@@ -32,5 +32,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
     assert { new_repo }
     assert_redirected_to repositories_path
+    assert_enqueued_with job: RepositoryLoaderJob
+    assert_enqueued_with job: GithubRepositoryHookJob
   end
 end

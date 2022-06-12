@@ -4,18 +4,9 @@ require 'test_helper'
 
 class RepositoryLoaderJobTest < ActiveJob::TestCase
   test 'should load repository' do
-    user = users(:one)
-    repository = user.repositories.create
+    repository = repositories(:blank)
 
-    assert_nil repository.name
-
-    assert_enqueued_with job: RepositoryLoaderJob,
-                         args: [repository],
-                         queue: 'default' do
-      RepositoryLoaderJob.perform_later(repository)
-    end
-
-    perform_enqueued_jobs
+    RepositoryLoaderJob.perform_now(repository)
 
     repository.reload
 

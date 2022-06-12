@@ -9,13 +9,7 @@ class RepositoryCheckJobTest < ActiveJob::TestCase
 
     assert_nil check.passed
 
-    assert_enqueued_with job: RepositoryCheckJob,
-                         args: [check],
-                         queue: 'default' do
-      RepositoryCheckJob.perform_later(check)
-    end
-
-    perform_enqueued_jobs
+    RepositoryCheckJob.perform_now(check)
 
     check.reload
 

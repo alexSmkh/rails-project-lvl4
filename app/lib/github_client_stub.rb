@@ -16,7 +16,9 @@ class GithubClientStub
     fixture_to_hash('commits.json')
   end
 
-  def create_hook(_github_id, _api_url); end
+  def create_hook(_github_id, _api_url)
+    fixture_to_hash('repository_webhook_response.json')
+  end
 
   private
 

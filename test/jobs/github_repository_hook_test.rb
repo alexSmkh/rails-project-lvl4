@@ -4,12 +4,9 @@ require 'test_helper'
 
 class GithubRepositoryHookJobTest < ActiveJob::TestCase
   test 'should run job' do
-    repository = repositories(:one)
+    repository = repositories(:blank)
 
-    assert_enqueued_with job: GithubRepositoryHookJob,
-                         args: [repository],
-                         queue: 'default' do
-      GithubRepositoryHookJob.perform_later(repository)
-    end
+    response = GithubRepositoryHookJob.perform_now(repository)
+    assert { response[:active] }
   end
 end

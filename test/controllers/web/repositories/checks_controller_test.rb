@@ -14,6 +14,8 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'repository.checks.count' do
       post repository_checks_path(repository.id)
     end
+
+    assert_enqueued_with job: RepositoryCheckJob
   end
 
   test 'should get show' do
