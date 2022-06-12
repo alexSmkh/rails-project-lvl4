@@ -7,7 +7,7 @@ class FileSystemHelper
 
   def self.create_directory(directory_path)
     if Dir.exist? directory_path
-      FileSystemHelper.delete_directory directory_path
+      delete_directory directory_path
     end
 
     FileUtils.mkdir_p directory_path

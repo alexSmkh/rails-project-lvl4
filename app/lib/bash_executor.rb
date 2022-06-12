@@ -8,6 +8,6 @@ class BashExecutor
 
   def self.clone_repository(clone_url, directory_path)
     clone_command = "git clone #{clone_url} #{directory_path}"
-    BashExecutor.run_command(clone_command)
+    run_command(clone_command)
   end
 end
