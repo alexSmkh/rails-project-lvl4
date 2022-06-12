@@ -38,7 +38,7 @@
           th.fw-bold = Repository::Check.human_attribute_name(:created_at)
       tbody
         - @checks.each do |check|
-          tr class="#{'table-danger' if check.failed?}"
+          tr class="#{ class_names('table-danger': check.failed?)}"
             td
               = link_to check.id, repository_check_path(check.repository_id, check.id)
             td
