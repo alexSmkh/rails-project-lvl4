@@ -15,13 +15,13 @@ class Web::RepositoriesController < Web::ApplicationController
     acceptable_languages = Repository.language.values
     @repository = current_user.repositories.build
 
-    @repository_full_names = Rails.cache.fetch("user_#{current_user.id}_repos", expires_in: 1.minute) do
+    @repositories = Rails.cache.fetch("user_#{current_user.id}_repos", expires_in: 1.minute) do
       github_client
-      .repos
-      .filter do |repo|
-        acceptable_languages.include?(repo[:language]&.downcase) &&
-          already_added_repos.exclude?(repo[:name])
-      end
+        .repos
+        .filter do |repo|
+          acceptable_languages.include?(repo[:language]&.downcase) &&
+            already_added_repos.exclude?(repo[:name])
+        end
     end
   end
 
