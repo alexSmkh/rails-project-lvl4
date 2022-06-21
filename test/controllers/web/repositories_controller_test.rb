@@ -30,9 +30,10 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
     new_repo = Repository.find_by(github_id: 1)
 
-    assert { new_repo }
     assert_redirected_to repositories_path
-    assert_enqueued_with job: RepositoryLoaderJob
-    assert_enqueued_with job: GithubRepositoryHookJob
+
+    assert { new_repo }
+    assert { new_repo.fetched? }
+    assert { new_repo.name.present? }
   end
 end

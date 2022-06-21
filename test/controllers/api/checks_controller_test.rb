@@ -15,7 +15,10 @@ class Api::ChecksControllerTest < ActionDispatch::IntegrationTest
            }
     end
 
+    check = Repository::Check.last
+
+    assert { check.finished? }
+    assert { check.passed? }
     assert_response 200
-    assert_enqueued_with job: RepositoryCheckJob
   end
 end

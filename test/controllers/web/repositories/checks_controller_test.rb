@@ -15,7 +15,11 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
       post repository_checks_path(repository.id)
     end
 
-    assert_enqueued_with job: RepositoryCheckJob
+    check = Repository::Check.last
+
+    assert { check.finished? }
+    assert { check.passed? }
+    assert_redirected_to repository_path(repository.id)
   end
 
   test 'should get show' do
