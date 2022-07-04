@@ -5,6 +5,7 @@
 
 The service monitors the quality of repositories on the githab. It tracks changes and runs them through built-in analyzers, and then sends a notification to the user's email. Currently 2 languages are supported: ruby, javascript. [Demo](https://nameless-wildwood-93384.herokuapp.com/)
 
+![](preview.gif)
 
 # How to run
 * Create a new [Github OAuth App](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app)
